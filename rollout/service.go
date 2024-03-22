@@ -259,10 +259,11 @@ func (c *rolloutContext) reconcileStableAndCanaryService() error {
 	}
 
 	if c.pauseContext != nil && c.pauseContext.IsAborted() && c.rollout.Spec.Strategy.Canary.TrafficRouting == nil {
-		err = c.ensureSVCTargets(c.rollout.Spec.Strategy.Canary.CanaryService, c.stableRS, true)
-		if err != nil {
-			return err
-		}
+		// Problem with the ALB readinessGates
+		// err = c.ensureSVCTargets(c.rollout.Spec.Strategy.Canary.CanaryService, c.stableRS, true)
+		// if err != nil {
+		// 	return err
+		// }
 		return nil
 	}
 
